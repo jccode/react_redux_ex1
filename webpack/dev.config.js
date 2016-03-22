@@ -1,3 +1,4 @@
+require('babel-polyfill');
 
 var fs = require('fs');
 var path = require('path');
@@ -23,7 +24,8 @@ module.exports = {
 
     output: {
         path: "./src/js/",
-        filename: "bundle.js"
+        filename: "bundle.js",
+        publicPath: './dist/'
     },
 
     module: {

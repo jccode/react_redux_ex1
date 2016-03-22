@@ -5,13 +5,23 @@
   "main": "index.js",
   "scripts": {
     "build": "better-npm-run build",
+    "start-dev": "better-npm-run start-dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "betterScripts": {
     "build": {
       "command": "webpack --verbose --colors --display-error-details --config webpack/dev.config.js",
       "env": {
+        "NODE_PATH": "./src",
         "NODE_ENV": "dev"
+      }
+    },
+    "start-dev": {
+      "command": "node $NODE_DEBUG_OPTION ./bin/server.js",
+      "env": {
+        "NODE_PATH": "./src",
+        "NODE_ENV": "dev",
+        "PORT": 3000
       }
     }
   },
@@ -23,6 +33,7 @@
   "license": "ISC",
   "dependencies": {
     "babel-polyfill": "^6.7.2",
+    "babel-register": "^6.7.2",
     "express": "^4.13.4",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
