@@ -23,9 +23,9 @@ module.exports = {
     entry: "./src/js/index.js",
 
     output: {
-        path: "./src/js/",
+        path: path.join(root, 'src', 'js'),
         filename: "bundle.js",
-        publicPath: './dist/'
+        publicPath: '/js/'
     },
 
     module: {

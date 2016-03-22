@@ -18,8 +18,7 @@ const port = config.port;
     const hotMiddleware = require('webpack-hot-middleware');
     const compiler = webpack(webpackConfig);
 
-    /*
-    const serverOptions = {
+    let serverOptions = {
         contentBase: 'http://' + host + ':' + port,
         quiet: true,
         noInfo: true,
@@ -27,14 +26,9 @@ const port = config.port;
         inline: true,
         lazy: false,
         publicPath: webpackConfig.output.publicPath
-        stats: {colors: true}
     };
-    */
-    const serverOptions = {
-        publicPath: webpackConfig.output.publicPath
-    };
-    
-    // app.use(devMiddleware(compiler, serverOptions));
+
+    app.use(devMiddleware(compiler, serverOptions));
     // app.use(hotMiddleware(compiler));
 
     app.use(express.static(path.join(root, 'src')));
