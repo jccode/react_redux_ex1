@@ -29,7 +29,7 @@ const port = config.port;
     };
 
     app.use(devMiddleware(compiler, serverOptions));
-    // app.use(hotMiddleware(compiler));
+    app.use(hotMiddleware(compiler));
 
     app.use(express.static(path.join(root, 'src')));
 })();

@@ -2,8 +2,9 @@ require('babel-polyfill');
 
 var fs = require('fs');
 var path = require('path');
+var webpack = require('webpack');
 
-var root = path.join(__dirname, "/..")
+var root = path.join(__dirname, "..")
 
 var babelrc = fs.readFileSync(path.join(root, '/.babelrc'));
 var babelrcObj = {};
@@ -20,12 +21,19 @@ module.exports = {
     
     context: root,
     
-    entry: "./src/js/index.js",
+    entry: [
+        "webpack-hot-middleware/client",
+        "./src/index"
+    ],
 
     output: {
-        path: path.join(root, 'src', 'js'),
+        path: path.join(root, 'src'),
         filename: "bundle.js",
-        publicPath: '/js/'
+        publicPath: '/'
+    },
+
+    resolve: {
+        extensions: ['', '.jsx', '.js', '.json', '.scss']
     },
 
     module: {
@@ -33,5 +41,14 @@ module.exports = {
             { test: /\.css$/, loader: "style!css" },
             { test: /\.jsx?$/, loader: "babel-loader", exclude: /node_modules/, query: {'presets': babelrcObj.presets} }
         ]
-    }
+    },
+
+    plugins: [
+        // Webpack 1.0
+        new webpack.optimize.OccurenceOrderPlugin(),
+        // Webpack 2.0 fixed this mispelling
+        // new webpack.optimize.OccurrenceOrderPlugin(),
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoErrorsPlugin()
+    ]
 };
