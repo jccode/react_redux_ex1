@@ -23,23 +23,25 @@ function todos(state = [], action) {
                     completed: false
                 }
             ];
-        case COMPLETE_TODO:
+
+        // case COMPLETE_TODO:
+        //     return state.map((todo, index) => {
+        //         if (index === action.index) {
+        //             return Object.assign({}, todo, {
+        //                 completed: true
+        //             });
+        //         }
+        //         return todo;
+        //     });
+
+        case TOGGLE_TODO:
             return state.map((todo, index) => {
-                if (index === action.index) {
+                if (todo.id === action.id) {
                     return Object.assign({}, todo, {
-                        completed: true
+                        completed: !todo.completed
                     });
                 }
                 return todo;
-            });
-        case TOGGLE_TODO:
-            return state.map((todo, index) => {
-                if (index === action.index) {
-                    let c = todo.completed;
-                    return Object.assign({}, todo, {
-                        completed: !c
-                    });
-                }
             });
         default:
             return state;
