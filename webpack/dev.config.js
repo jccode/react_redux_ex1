@@ -39,6 +39,7 @@ module.exports = {
     module: {
         loaders: [
             { test: /\.css$/, loader: "style!css" },
+            { test: /\.scss$/, loader: "style!css?localIdentName=[path][name]--[local]!postcss-loader!sass" },
             { test: /\.jsx?$/, loader: "babel-loader", exclude: /node_modules/, query: {'presets': babelrcObj.presets} }
         ]
     },
